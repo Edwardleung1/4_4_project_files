@@ -18,6 +18,18 @@ function calculateResults() {
   const principal = parseFloat(amount.values);
   const calculatedInterest = parseFloat(interest.value) / 100 / 12;
   const calculatedPayments = parseFloat(years.value) * 12;
+  // Calculate Monthly Payments
+  const x = Math.pow(1 + calculatedInterest, calculatedPayments);
+  // x = (1+calculatedInterest)pow calculatedPayments
+  const monthly = (principal * x * calculatedInterest) / (x - 1);
+
+  if (isFinite(monthly)) {
+    monthlyPayment.value = monthly.toFixed(2); // Setting it to 2 decimal pts
+    totalPayment.value = (monthly * calculatedPayments).toFixed(2);
+    totalInterest.value = (monthly * calculatedPayments - principal).toFixed(2);
+  } else {
+    console.log("Please check your numbers");
+  }
 
   e.preventDefault(); // Need to prevent the default form behaviour
 }
