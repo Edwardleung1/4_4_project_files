@@ -1,10 +1,16 @@
 // Listen for FORM submit
-document
-  .getElementById("loan-form")
-  .addEventListener("submit", calculateResults);
+document.getElementById("loan-form").addEventListener("submit", function (e) {
+  // Hide results
+  document.getElementById("results").style.display = "none";
+
+  // Show loader
+  document.getElementById("loading").style.display = "block";
+
+  e.preventDefault();
+});
 
 // Calculate Results
-function calculateResults(e) {
+function calculateResults() {
   console.log("Calculating...");
   // UI Form Variables
   const amount = document.getElementById("amount");
@@ -30,8 +36,6 @@ function calculateResults(e) {
   } else {
     showError("Please check your numbers");
   }
-
-  e.preventDefault(); // Need to prevent the default form behaviour
 }
 
 // Show Error
